@@ -16,7 +16,7 @@ import (
 const (
 	KeySchemaSuffix = "-key"
 	ValueSchemaSuffix = "-value"
-	SchemaPackage = "objectpartners.com/machrist/schema/"
+	SchemaGoModule = "github.com/mark-christiansen/go-kafka/schema/"
 )
 
 type MessageProducer struct {
@@ -79,7 +79,7 @@ func getAvroMessageBytes(subject string, client kafka.SchemaRegistryClient, mess
 		// if the schema is not found in the schema registry, register the local version of the schema in this application
 		if strings.HasSuffix(err.Error(), "Subject not found.") {
 
-			schemaLocalFilepath, err := filepath.Abs(os.Getenv("GOPATH")  + "/src/" + SchemaPackage + subject + ".avsc")
+			schemaLocalFilepath, err := filepath.Abs(os.Getenv("GOPATH")  + "/src/" + SchemaGoModule + subject + ".avsc")
 			if err != nil {
 				return errors.Wrap(err, fmt.Sprintf("Could not find local schema file at %s", schemaLocalFilepath))
 			}
