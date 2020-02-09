@@ -1,0 +1,37 @@
+{
+  "type": "record",
+  "name": "Person",
+  "namespace": "com.opi.kafka.avro",
+  "doc": "A person",
+  "fields": [
+    {
+      "name": "name",
+      "type": {
+        "type": "string",
+        "avro.java.string": "String"
+      },
+      "doc": "Person full name"
+    },
+    {
+      "name": "address",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "avro.java.string": "String"
+        }
+      ],
+      "doc": "Person home address",
+      "default": null
+    },
+    {
+      "name": "age",
+      "type": [
+        "null",
+        "int"
+      ],
+      "doc": "Person age is years",
+      "default": null
+    }
+  ]
+}

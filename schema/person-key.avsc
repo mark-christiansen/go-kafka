@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "name": "PersonKey",
+  "namespace": "com.opi.kafka.avro",
+  "doc": "A person key",
+  "fields": [
+    {
+      "name": "name",
+      "type": {
+        "type": "string",
+        "avro.java.string": "String"
+      },
+      "doc": "Person full name"
+    }
+  ]
+}
