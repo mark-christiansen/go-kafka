@@ -7,51 +7,51 @@
 package schema
 
 import (
-	"io"
-	"fmt"
+    "io"
+    "fmt"
 
-	"github.com/actgardner/gogen-avro/vm"
-	"github.com/actgardner/gogen-avro/vm/types"
+    "github.com/actgardner/gogen-avro/vm"
+    "github.com/actgardner/gogen-avro/vm/types"
 )
 
 
 type UnionNullStringTypeEnum int
 const (
 
-	 UnionNullStringTypeEnumNull UnionNullStringTypeEnum = 0
+     UnionNullStringTypeEnumNull UnionNullStringTypeEnum = 0
 
-	 UnionNullStringTypeEnumString UnionNullStringTypeEnum = 1
+     UnionNullStringTypeEnumString UnionNullStringTypeEnum = 1
 
 )
 
 type UnionNullString struct {
 
-	Null *types.NullVal
+    Null *types.NullVal
 
-	String string
+    String string
 
-	UnionType UnionNullStringTypeEnum
+    UnionType UnionNullStringTypeEnum
 }
 
 func writeUnionNullString(r *UnionNullString, w io.Writer) error {
-	err := vm.WriteLong(int64(r.UnionType), w)
-	if err != nil {
-		return err
-	}
-	switch r.UnionType{
-	
-	case UnionNullStringTypeEnumNull:
-		return vm.WriteNull(r.Null, w)
+    err := vm.WriteLong(int64(r.UnionType), w)
+    if err != nil {
+        return err
+    }
+    switch r.UnionType{
+
+    case UnionNullStringTypeEnumNull:
+        return vm.WriteNull(r.Null, w)
         
-	case UnionNullStringTypeEnumString:
-		return vm.WriteString(r.String, w)
+    case UnionNullStringTypeEnumString:
+        return vm.WriteString(r.String, w)
         
-	}
-	return fmt.Errorf("invalid value for *UnionNullString")
+    }
+    return fmt.Errorf("invalid value for *UnionNullString")
 }
 
 func NewUnionNullString() *UnionNullString {
-	return &UnionNullString{}
+    return &UnionNullString{}
 }
 
 func (_ *UnionNullString) SetBoolean(v bool) { panic("Unsupported operation") }
@@ -61,25 +61,25 @@ func (_ *UnionNullString) SetDouble(v float64) { panic("Unsupported operation") 
 func (_ *UnionNullString) SetBytes(v []byte) { panic("Unsupported operation") }
 func (_ *UnionNullString) SetString(v string) { panic("Unsupported operation") }
 func (r *UnionNullString) SetLong(v int64) { 
-	r.UnionType = (UnionNullStringTypeEnum)(v)
+    r.UnionType = (UnionNullStringTypeEnum)(v)
 }
 func (r *UnionNullString) Get(i int) types.Field {
-	switch (i) {
-	
-	case 0:
-		
-		
-		return r.Null
-		
-	
-	case 1:
-		
-		
-		return (*types.String)(&r.String)
-		
-	
-	}
-	panic("Unknown field index")
+    switch (i) {
+
+    case 0:
+
+
+        return r.Null
+
+
+    case 1:
+
+
+        return (*types.String)(&r.String)
+
+
+    }
+    panic("Unknown field index")
 }
 func (_ *UnionNullString) SetDefault(i int) { panic("Unsupported operation") }
 func (_ *UnionNullString) AppendMap(key string) types.Field { panic("Unsupported operation") }

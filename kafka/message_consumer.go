@@ -1,7 +1,7 @@
 package kafka
 
 import (
-	"time"
+    "time"
 )
 
 type MessageConsumer interface {

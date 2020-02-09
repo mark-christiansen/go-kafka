@@ -7,10 +7,10 @@
 package schema
 
 import (
-	"io"
-	"github.com/actgardner/gogen-avro/vm/types"
-	"github.com/actgardner/gogen-avro/vm"
-	"github.com/actgardner/gogen-avro/compiler"
+    "io"
+    "github.com/actgardner/gogen-avro/vm/types"
+    "github.com/actgardner/gogen-avro/vm"
+    "github.com/actgardner/gogen-avro/compiler"
 )
 
 
@@ -18,69 +18,69 @@ import (
   
 type PersonKey struct {
 
-	
-	// Person full name
-	
-	
-		Name string
-	
+
+    // Person full name
+
+
+        Name string
+
 
 }
 
 func NewPersonKey() (*PersonKey) {
-	return &PersonKey{}
+    return &PersonKey{}
 }
 
 func DeserializePersonKey(r io.Reader) (*PersonKey, error) {
-	t := NewPersonKey()
-	deser, err := compiler.CompileSchemaBytes([]byte(t.Schema()), []byte(t.Schema()))
-	if err != nil {
-		return nil, err
-	}
+    t := NewPersonKey()
+    deser, err := compiler.CompileSchemaBytes([]byte(t.Schema()), []byte(t.Schema()))
+    if err != nil {
+        return nil, err
+    }
 
-	err = vm.Eval(r, deser, t)
-	if err != nil {
-		return nil, err	
-	}
-	return t, err
+    err = vm.Eval(r, deser, t)
+    if err != nil {
+        return nil, err
+    }
+    return t, err
 }
 
 func DeserializePersonKeyFromSchema(r io.Reader, schema string) (*PersonKey, error) {
-	t := NewPersonKey()
+    t := NewPersonKey()
 
-	deser, err := compiler.CompileSchemaBytes([]byte(schema), []byte(t.Schema()))
-	if err != nil {
-		return nil, err
-	}
+    deser, err := compiler.CompileSchemaBytes([]byte(schema), []byte(t.Schema()))
+    if err != nil {
+        return nil, err
+    }
 
-	err = vm.Eval(r, deser, t)
-	if err != nil {
-		return nil, err	
-	}
-	return t, err
+    err = vm.Eval(r, deser, t)
+    if err != nil {
+        return nil, err
+    }
+    return t, err
 }
 
 func writePersonKey(r *PersonKey, w io.Writer) error {
-	var err error
-	
-	err = vm.WriteString( r.Name, w)
-	if err != nil {
-		return err			
-	}
-	
-	return err
+    var err error
+
+    err = vm.WriteString( r.Name, w)
+    if err != nil {
+        return err
+    }
+
+    return err
 }
 
 func (r *PersonKey) Serialize(w io.Writer) error {
-	return writePersonKey(r, w)
+    return writePersonKey(r, w)
 }
 
 func (r *PersonKey) Schema() string {
-	return "{\"doc\":\"A person key\",\"fields\":[{\"doc\":\"Person full name\",\"name\":\"name\",\"type\":{\"avro.java.string\":\"String\",\"type\":\"string\"}}],\"name\":\"PersonKey\",\"namespace\":\"com.opi.kafka.avro\",\"type\":\"record\"}"
+    return "{\"doc\":\"A person key\",\"fields\":[{\"doc\":\"Person full name\",\"name\":\"name\",\"type\":{\"avro.java.string\":\"String\",\"type\":\"string\"}}],\"name\":\"PersonKey\",\"namespace\":\"com.opi.kafka.avro\",\"type\":\"record\"}"
 }
 
 func (r *PersonKey) SchemaName() string {
-	return "com.opi.kafka.avro.PersonKey"
+    return "com.opi.kafka.avro.PersonKey"
 }
 
 func (_ *PersonKey) SetBoolean(v bool) { panic("Unsupported operation") }
@@ -93,25 +93,25 @@ func (_ *PersonKey) SetString(v string) { panic("Unsupported operation") }
 func (_ *PersonKey) SetUnionElem(v int64) { panic("Unsupported operation") }
 
 func (r *PersonKey) Get(i int) types.Field {
-	switch (i) {
-	
-	case 0:
-		
-		
-			return (*types.String)(&r.Name)
-		
-	
-	}
-	panic("Unknown field index")
+    switch (i) {
+
+    case 0:
+
+
+            return (*types.String)(&r.Name)
+
+
+    }
+    panic("Unknown field index")
 }
 
 func (r *PersonKey) SetDefault(i int) {
-	switch (i) {
-	
+    switch (i) {
+
         
-	
-	}
-	panic("Unknown field index")
+
+    }
+    panic("Unknown field index")
 }
 
 func (_ *PersonKey) AppendMap(key string) types.Field { panic("Unsupported operation") }
